@@ -27,4 +27,3 @@ document.getElementById("generatePalette").addEventListener("click", () => {
       palette.appendChild(colorBox);
     });
   }
-  
