@@ -103,21 +103,20 @@ function displayColors(colors) {
 
     // Create copy buttons for different formats
     const formats = [
-      { name: "HEX", action: () => rgbToHex(color) },
-      { name: "RGB", action: () => color },
-      { name: "HSL", action: () => rgbToHsl(color) },
+      { type: "HEX", value: rgbToHex(color) },
+      { type: "RGB", value: color },
+      { type: "HSL", value: rgbToHsl(color) },
     ];
 
     formats.forEach((format) => {
       const button = document.createElement("button");
-      button.textContent = format.name;
+      button.textContent = format.value;
       button.className = "copy-button";
       button.addEventListener("click", () => {
-        const colorValue = format.action();
-        navigator.clipboard.writeText(colorValue);
+        navigator.clipboard.writeText(format.value);
         button.textContent = "Copied!";
         setTimeout(() => {
-          button.textContent = format.name;
+          button.textContent = format.value;
         }, 1000);
       });
       buttonContainer.appendChild(button);
