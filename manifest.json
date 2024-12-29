@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Color Palette Generator",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Generate a color palette from the current web page.",
     "permissions": ["activeTab", "scripting"],
     "host_permissions": ["<all_urls>"],
