@@ -1,15 +1,18 @@
 {
-    "manifest_version": 3,
-    "name": "Color Palette Generator",
-    "version": "0.3.0",
-    "description": "Generate a color palette from the current web page.",
-    "permissions": ["activeTab", "scripting"],
-    "host_permissions": ["<all_urls>"],
-    "action": {
-      "default_popup": "popup.html"
-    },
-    "background": {
-      "service_worker": "background.js"
-    }
+  "manifest_version": 3,
+  "name": "Color Palette Generator",
+  "version": "0.3.0",
+  "description": "Generate a color palette from the current web page.",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
   }
-  
+}

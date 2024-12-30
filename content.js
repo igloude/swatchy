@@ -99,6 +99,39 @@ function convertRgbaToRgb(color) {
   return color;
 }
 
+function getColorScore(color) {
+  const rgb = color.startsWith("#") ? hexToRgb(color) : parseRgb(color);
+  if (!rgb) return 0;
+
+  // Calculate grayscale value (0-255)
+  const gray = (rgb.r + rgb.g + rgb.b) / 3;
+
+  // For grayscale colors, return value based on brightness
+  if (Math.abs(rgb.r - rgb.g) < 10 && Math.abs(rgb.g - rgb.b) < 10) {
+    return gray;
+  }
+
+  // For colored pixels, calculate hue angle (0-360)
+  const max = Math.max(rgb.r, rgb.g, rgb.b);
+  const min = Math.min(rgb.r, rgb.g, rgb.b);
+  let hue = 0;
+
+  if (max === min) {
+    hue = 0;
+  } else if (max === rgb.r) {
+    hue = 60 * ((rgb.g - rgb.b) / (max - min));
+  } else if (max === rgb.g) {
+    hue = 60 * (2 + (rgb.b - rgb.r) / (max - min));
+  } else {
+    hue = 60 * (4 + (rgb.r - rgb.g) / (max - min));
+  }
+
+  if (hue < 0) hue += 360;
+
+  // Return value that puts grayscale first (1000+), then colors by hue (2000+)
+  return gray < 30 || gray > 225 ? gray : 2000 + hue;
+}
+
 // listen for messages from the popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "extractColors") {
@@ -122,6 +155,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         }
       }
     }
+
+    // Sort colors by grayscale first, then by hue
+    uniqueColors.sort((a, b) => getColorScore(a) - getColorScore(b));
 
     console.log(uniqueColors);
 
