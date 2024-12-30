@@ -1,9 +1,24 @@
 <template>
   <div class="popup-container">
-    <h1>Swatchy Popup</h1>
+    <nav>
+      <h1>Swatchy</h1>
+      <button
+        @click="colors = []"
+        v-if="colors.length"
+      >
+        Reset
+      </button>
+      <a
+        href="../options/options.html"
+        target="_blank"
+      >
+        Options
+      </a>
+    </nav>
     <button
       id="generatePalette"
       @click="generatePalette"
+      v-if="!colors.length"
     >
       Generate Palette
     </button>
