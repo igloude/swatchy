@@ -22,30 +22,50 @@ button#generatePalette {
   border-radius: 4px;
 }
 
+button#generatePalette:hover {
+  background-color: #0069d9;
+}
+
 #palette {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
 }
 
+.message {
+  margin: 0;
+  color: #666;
+  font-size: 13px;
+}
+
+.color-box-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .color-preview {
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 40px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
 .button-container {
   display: flex;
-  gap: 10px;
+  gap: 6px;
 }
 
 .copy-button {
-  width: 100%;
-  padding: 10px;
+  flex: 1;
+  padding: 6px 0;
   border: none;
   background-color: #f0f0f0;
   color: black;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.copy-button:hover {
+  background-color: #e2e2e2;
 }
